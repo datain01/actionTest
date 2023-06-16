@@ -1,3 +1,5 @@
+name: Deploy to GitHub Pages
+
 on:
   push:
     branches:
@@ -15,7 +17,6 @@ jobs:
         run: |
           mkdir dist
           cp actionConnect/index.html dist/
-          cp actionConnect/helloWorldImage.png dist/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
