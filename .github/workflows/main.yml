@@ -33,7 +33,7 @@ jobs:
           # Upload entire repository
           path: '.'
       - run: mkdir dist
-      - run: cp index*.html ./dist
+      - run: cp actionConnect/index.html ./dist
       - run: ls -la ./dist
       - name: Deploy to GitHub Pages
         id: deployment
