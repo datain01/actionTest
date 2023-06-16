@@ -37,3 +37,4 @@ jobs:
         uses: actions/deploy-pages@v2
         with:
           github_token: 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
+          publish_dir: ./actionConnect
