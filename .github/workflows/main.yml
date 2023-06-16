@@ -32,11 +32,14 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
-      - run: mkdir dist
-      - run: cp actionConnect/index.html ./dist
-      - run: ls -la ./dist
+      - name: Create dist directory
+        run: mkdir dist
+      - name: Copy index.html to dist
+        run: cp actionConnect/index.html ./dist
+      - name: Check dist directory
+        run: ls -la ./dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
         with:
-          base_dir: ./dist
+          publish_dir: ./dist
