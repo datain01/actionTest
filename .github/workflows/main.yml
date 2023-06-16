@@ -1,34 +1,24 @@
-name: Build and Deploy # Github Action 이름
-
 on:
   push:
     branches:
-      - main # 빌드할 브랜치
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
+      - name: Build and Deploy
+        run: |
+          mkdir dist
+          cp actionConnect/index.html dist/
+          cp actionConnect/helloWorldImage.png dist/
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - run: npm ci
-      - run: npm run build # 빌드 스크립트
-
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build # 이 폴더에 있는 파일을 배포
+          publish_dir: ./dist
